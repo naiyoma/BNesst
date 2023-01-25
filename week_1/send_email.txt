@@ -1,0 +1,86 @@
+import os
+imports the os library, which allows the script to interact with the operating system
+import schedule
+schedule library, which is used to schedule the script to run at a specific time.
+import time
+time library, which is used to set the amount of time the script waits before running the next scheduled task.
+import smtplib
+mtplib library, which is used to send email
+import logging
+logging library, which is used to create a log file to keep track of the emails sent and any errors that may have occurred during the email sending process.
+from email import encoders
+imports the encoders module from the email library, which is used to encode the attachment in base64 format
+MIMEText class from the email.mime.text module, which is used to create the email message
+from email.mime.text import MIMEText
+MIMEMultipart class from the email.mime.multipart module, which is used to create a multipart email message
+from email.mime.multipart import MIMEMultipart
+MIMEBase class from the email.mime.base module, which is used to create the attachment
+from email.mime.base import MIMEBase
+
+function sets up the basic configuration for the log file, including the filename(email.log) and the level of logging
+logging.basicConfig(filename='email.log', level=logging.INFO)
+
+def send_email():
+    initiate  a function send_email, that will be called everytime to send a user an email.
+    try:
+        import pdb; pdb.set_trace()
+        user = "Aurelia"
+        password = "1234"
+        sender = "aurelia@gmail.com"
+        recipients = ["lankas.aurelia@gmail.com", "aurelianaiyoma3@gmail.com"]
+        the lines above define the user, password, sender and receipients of the email
+        smtp_object = smtplib.SMTP('smtp.gmail.com', 587)
+        creates an SMTP object that will connect to the smtp server at smtp.gmail.com on port 587
+        message = "Hello, attached below is the annual reports"
+        creates a variable called message that contains a string value "Hello, attached below is the annual reports"
+        smtp_object.ehlo()
+        sends the EHLO command to the SMTP server. This is used to initiate a conversation with the server and is typically the first command sent
+        smtp_object.starttls()
+        starts Transport Layer Security (TLS) encryption on the connection. This is used to secure the connection and protect the data being sent.
+        smtp_object.ehlo()
+        sends the EHLO command again after starting TLS encryption
+        smtp_object.login('lankas.aurelia@gmail.com', 'wvjtvykjgegwxsjo')
+        sends the login command to the SMTP server, providing the username and password, this is for autentication purposes
+        for receiver in recipients:
+            we start by looping through the list of receipients
+            import pdb; pdb.set_trace()
+            message = MIMEMultipart("related")
+            creates a new MIME multipart message object with the "related" subtype
+            message["Subject"] = "Daily Report"
+            create the subject of the email
+            message["from"] = sender
+            set the email sender
+            message["To"] = receiver
+            set the receiver of the email
+            file_path = "/home/naiyoma/Documents/LankasB__CV.pdf"
+            describe the path of the report that i have sent
+            part = MIMEBase('application', "octet-stream")
+            creates a MIMEBase object with the type 'application' and subtype 'octet-stream',
+            part.set_payload(open(file_path, "rb").read())
+            opening the file in binary mode using the 'rb' flag and reading its contents.
+            encoders.encode_base64(part)
+            encodes the payload of the MIMEBase object in base64 encoding
+            part.add_header('Content-Disposition', 'attachment', filename=os.path.basename(file_path))
+            adds a header to the MIMEBase object with the key 'Content-Disposition'
+            message.attach(part)
+            attaches the MIMEBase object to the MIMEMultipart object, which is the message that will be sent.
+            smtp_object.sendmail(sender, receiver, message.as_string())
+            sends the email with the sender, receiver, and message as arguments.
+        smtp_object.quit()
+        seventh line closes the connection to the SMTP server.
+    except Exception as e:
+        logging module to log the error message associated with the exception object "e" at the error level
+        logging.error(e)
+    else:
+        logging module to log a message at the info level indicating that an email was successfully sent
+        logging.info('Email sent to {}'.format(receiver))
+uses the schedule library to schedule the send_email function to run every day at 18:55
+schedule.every().day.at("18:55").do(send_email)
+
+
+while True:
+    the schedule.run_pending() method is called to check if any scheduled tasks need to be run
+    schedule.run_pending()
+    time.sleep(1)
+    function is used to pause the execution of the loop for 1 second, preventing the loop from using up too much of the CPU resources.
+

@@ -1,19 +1,21 @@
 import os
 import ftplib
 import shutil
+import schedule
+import time
+import logging
 from ftplib import FTP
-
 
 
 local_directory = '/home/naiyoma/Documents/ftp_org/'
 
+logging.basicConfig(filename='data_transfer.log', level=logging.INFO)
+
 def process_data():
-    # import pdb; pdb.set_trace()
     ftp = FTP("ftp.pureftpd.org")
     ftp.login()
     files = ftp.nlst()
     print(files)
-    # import pdb; pdb.set_trace()
     if not os.path.exists(local_directory):
         os.makedirs(local_directory)
     for file in files:
@@ -27,6 +29,14 @@ def process_data():
                 print(file + ": An error occured:", e)
     ftp.quit()
     for file in files:
-        shutil.move(local_directory + file, internal_directory + file)
+        try:
+            shutil.move(local_directory + file, local_directory + file)
+            logging.info(f"{file} is a directory.")
+        except ftplib.error_perm as e:
+            logging.info(f"{file} successfullt transfered.")
 
-process_data()
+schedule.every().day.at("09:00").do(process_data)
+
+while True:
+    schedule.run_pending()
+    time.sleep(1)

@@ -13,16 +13,15 @@ logging.basicConfig(filename='email.log', level=logging.INFO)
 def send_email():
     try:
         import pdb; pdb.set_trace()
-        user = "Aurelia"
-        password = "1234"
+        
         sender = "aurelia@gmail.com"
-        recipients = ["lankas.aurelia@gmail.com", "aurelianaiyoma3@gmail.com"]
+        recipients = ["aurelia@gmail.com", "aureli3@gmail.com"]
         smtp_object = smtplib.SMTP('smtp.gmail.com', 587)
         message = "Hello, attached below is the annual reports"
         smtp_object.ehlo()
         smtp_object.starttls()
         smtp_object.ehlo()
-        smtp_object.login('lankas.aurelia@gmail.com', 'wvjtvykjgegwxsjo')
+        smtp_object.login('aurelia@gmail.com', '')
         for receiver in recipients:
             import pdb; pdb.set_trace()
             message = MIMEMultipart("related")

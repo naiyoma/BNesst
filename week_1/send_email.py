@@ -22,7 +22,7 @@ def send_email():
         smtp_object.ehlo()
         smtp_object.starttls()
         smtp_object.ehlo()
-        smtp_object.login('lankas.aurelia@gmail.com', '')
+        smtp_object.login('lankas.aurelia@gmail.com', 'wvjtvykjgegwxsjo')
         for receiver in recipients:
             import pdb; pdb.set_trace()
             message = MIMEMultipart("related")

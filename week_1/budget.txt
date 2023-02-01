@@ -1,0 +1,23 @@
+The create_budget_db() function creates a SQLite database called "budget.db" 
+        with three tables: income, expenses, and budget_goals. 
+        It uses the sqlite3 library to connect to the database and execute SQL statements to create the tables.
+The generate_data() function retrieves the data
+        from the three tables in the "budget.db" database using the pandas library, 
+        and plots the data using the matplotlib library. The data is plotted in bar charts, 
+        with income data in blue and expenses data in red. Additionally, a table is created using the budget goals data, 
+        which is displayed in the center of the plot.
+The on_submit() function is executed when the "Submit" button is pressed.
+        It retrieves the data entered in the income, expense, 
+        and budget goal text fields, and inserts it into the relevant tables in the "budget.db" 
+        database. 
+        The function also prints a message indicating that the data has been saved to the database.
+The main part of the code creates the GUI for the budget management
+    application using the tkinter library. 
+    It includes three text fields for entering income, 
+    expenses, and budget goal data, and a "Submit" button. 
+    When the "Submit" button is pressed, the on_submit() function 
+    is executed and the entered data is saved to the database.
+
+
+
+

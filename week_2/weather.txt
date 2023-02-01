@@ -1,0 +1,15 @@
+The generate_nairobi_weather function makes an API call to OpenWeatherMap to retrieve the weather data for Nairobi.
+The requests library is used to send a GET request to the API and retrieve the response,
+which is in JSON format. 
+The JSON data is then parsed using the json library and the relevant weather data is stored in variables weather_data
+and more_data. 
+The parsed data is displayed using the tkinter library,
+ which is used to create a graphical user interface for the application.
+  A GUI is created with a text widget displaying the weather data and a button that, 
+  when clicked, opens a new window with more detailed information about the weather.
+
+The show_more_data function is called when the "More" button is clicked in the main window.
+This function creates a new window using tkinter and displays additional weather information
+in a text widget.
+
+Finally, the generate_nairobi_weather function is called to run the weather application.

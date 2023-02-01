@@ -21,3 +21,39 @@ Word: j a _ a
 Guess a letter: v                                                                                                                                                
 You guessed the word java !
 '''
+def hangman_game(
+    word, wrong,
+    remainder, 
+    used_letters):
+        while wrong < 6:
+            print("\n")
+            message = "Guess a letter: "
+            guess = input(message)
+            if guess in remainder:
+                used_letters.add(guess)
+                remainder.remove(guess)
+                print("You have", 6 - wrong, "tries left.")
+                print("Used letters: ", " ".join(used_letters))
+                new_word = "".join([letter if letter in used_letters else "_" for letter in word])
+                print("Word: ", new_word)
+                if "_" not in new_word:
+                    print("You guessed the word", word, "!")
+                    return
+        else:
+            wrong = wrong + 1
+            new = 6 - wrong
+            print("You have", {new}, "tries left.")
+            print("Used letters: ", " ".join(used_letters))
+            new_word = "".join([letter if letter in used_letters else "_" for letter in word])
+            print("Word: ", new_word)
+        print("You lost! The word was", word)
+
+def main(word):
+    word = word.lower()
+    wrong = 0
+    remainder = set(word)
+    used_letters = set()
+    hangman_game(word, wrong, remainder, used_letters)
+
+main("java")
+

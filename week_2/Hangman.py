@@ -48,12 +48,12 @@ def hangman_game(
             print("Word: ", new_word)
         print("You lost! The word was", word)
 
-def main(word):
+def start_game(word):
     word = word.lower()
     wrong = 0
     remainder = set(word)
     used_letters = set()
     hangman_game(word, wrong, remainder, used_letters)
 
-main("java")
+start_game("java")
 

@@ -1,0 +1,21 @@
+The start_game function sets the word to be guessed,
+initializes the number of wrong guesses to 0, 
+creates sets for the remaining letters in the word and the used letters,
+and then calls the hangman_game function. 
+
+
+
+The hangman_game function is the actual hangman game.
+The player is allowed to make up to 6 incorrect guesses.
+The function loops through the process of taking the player's guess,
+checking if it's in the remaining letters,
+updating the sets of used letters and remaining letters,
+and displaying the current state of the word being guessed.
+If the player successfully guesses all the letters in the word,
+the function ends with a message indicating that the player won.
+If the player makes 6 incorrect guesses,
+the function ends with a message indicating that the player lost.
+
+
+
+

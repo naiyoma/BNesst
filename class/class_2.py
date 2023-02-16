@@ -262,3 +262,16 @@
 
 
 
+def anagrams(words):
+    words_map = {}
+    for word in words:
+        sorted_word = ''.join(sorted(word))
+        if sorted_word in words_map:
+            words_map[sorted_word].append(word)
+        else:
+            words_map[sorted_word] = [word]
+
+    print(set(words_map.values()))
+
+A = ["cat",  "tea", "act", "eat"]
+print(anagrams(A))
